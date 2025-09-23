@@ -1,0 +1,146 @@
+{
+  "name": "coin-watchdog",
+  "displayName": "CoinWatchDog",
+  "description": "简单的OKX价格监控插件",
+  "version": "2.0.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:marketsView",
+    "onView:positionsView"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "coinWatchDog",
+          "title": "CoinWatchDog",
+          "icon": "$(graph)"
+        }
+      ]
+    },
+    "views": {
+      "coinWatchDog": [
+        {
+          "type": "webview",
+          "id": "marketsView",
+          "name": "Markets",
+          "when": "true"
+        },
+        {
+          "type": "webview",
+          "id": "positionsView",
+          "name": "Positions",
+          "when": "true"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "CoinWatchDog",
+      "properties": {
+        "coinWatchDog.markets.exchangeId": {
+          "type": "string",
+          "default": "okx",
+          "markdownDescription": "Exchange identifier for `Markets` view datasource (e.g., okx, binance, bybit).\n\nSee [supported exchange IDs](https://github.com/ccxt/ccxt/wiki/Exchange-Markets)",
+          "scope": "window"
+        },
+        "coinWatchDog.markets.watchSymbols": {
+          "type": "array",
+          "default": [
+            "ETH/USDT",
+            "SOL/USDT"
+          ],
+          "markdownDescription": "Symbols shown in the `Markets` view.\n\nUsually can be added directly in the `Markets` view without manual configuration.\n\nLearn more about [symbols](https://github.com/ccxt/ccxt/wiki/Manual#symbols-and-market-ids)",
+          "scope": "window",
+          "items": {
+            "type": "string"
+          }
+        },
+        "coinWatchDog.exchangeCredentials": {
+          "type": "object",
+          "default": {
+            "exchangeId": "",
+            "apiKey": "",
+            "secret": "",
+            "passphrase": ""
+          },
+          "markdownDescription": "Exchange credentials used by the `Positions` view via CCXT.\n\nThis is a restricted, machine-scoped setting and does not sync.\n\nSee [supported exchange IDs](https://github.com/ccxt/ccxt/wiki/Exchange-Markets)",
+          "scope": "machine",
+          "restricted": true,
+          "additionalProperties": false,
+          "properties": {
+            "exchangeId": {
+              "type": "string",
+              "default": "",
+              "description": "Exchange identifier (e.g., okx, binance, bybit)"
+            },
+            "apiKey": {
+              "type": "string",
+              "default": "",
+              "description": "API key issued by the exchange."
+            },
+            "secret": {
+              "type": "string",
+              "default": "",
+              "description": "API secret issued by the exchange."
+            },
+            "passphrase": {
+              "type": "string",
+              "default": "",
+              "description": "API passphrase if required by the exchange (e.g., OKX)."
+            }
+          }
+        },
+        "coinWatchDog.proxy": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "In some specific cases you may want a proxy, when:\n- Exchange is not available in your location\n- Your IP is forbidden by exchange\n- You experience random restriction by exchange, like DDoS protection by Cloudflare.\n\nSupports `http`, `https`, and `socks` protocols.\n\nLeave empty to disable proxy.",
+          "scope": "window"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "coinWatchDog.openSettings",
+        "title": "Settings",
+        "icon": "$(gear)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "coinWatchDog.openSettings",
+          "when": "view == marketsView",
+          "group": "navigation"
+        },
+        {
+          "command": "coinWatchDog.openSettings",
+          "when": "view == positionsView",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./ && npm run copy-resources",
+    "copy-resources": "cp -r src/webview/*.html src/webview/*.css dist/webview/",
+    "watch": "npm run watch-ts & npm run watch-resources",
+    "watch-ts": "tsc -watch -p ./",
+    "watch-resources": "chokidar 'src/webview/*.{html,css}' -c 'npm run copy-resources'"
+  },
+  "devDependencies": {
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "chokidar-cli": "^3.0.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "ccxt": "^4.5.4"
+  }
+}

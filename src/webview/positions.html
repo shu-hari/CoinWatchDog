@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoinWatchDog - Positions</title>
+    <style>
+        @import url('{{sharedCssPath}}');
+
+        .position-card {
+            background: var(--vscode-input-background);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .position-header {
+            margin-bottom: 10px;
+        }
+
+        .position-title {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .position-symbol {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--vscode-editor-foreground);
+            margin-bottom: 5px;
+        }
+
+        .position-badges {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            font-size: 10px;
+        }
+
+        .position-side {
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .side-long {
+            background: rgba(37,167,80,.1);
+            border-color: hsla(0,0%,100%,0);
+            color: #25a750;
+        }
+
+        .side-short {
+            background: rgba(202,63,100,.1);
+            border-color: hsla(0,0%,100%,0);
+            color: #ca3f64;
+        }
+
+        .margin-mode {
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: var(--vscode-button-secondaryBackground);
+            color: var(--vscode-button-secondaryForeground);
+        }
+
+        .leverage {
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: var(--vscode-button-secondaryBackground);
+            color: var(--vscode-button-secondaryForeground);
+        }
+
+        .position-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .pnl-section {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pnl-section .pnl-item:last-child {
+            text-align: right;
+        }
+
+        .pnl-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .pnl-label {
+            font-size: 12px;
+            color: var(--vscode-descriptionForeground);
+            opacity: 0.5;
+        }
+
+        .pnl-value {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .position-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px 20px;
+        }
+
+        .position-grid .grid-item:nth-child(3n) {
+            text-align: right;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .grid-label {
+            font-size: 12px;
+            color: var(--vscode-descriptionForeground);
+            opacity: 0.5;
+            text-transform: capitalize;
+        }
+
+        .grid-value {
+            font-size: 14px;
+            color: var(--vscode-editor-foreground);
+            font-weight: 500;
+            gap: 5px;
+        }
+
+        .no-positions {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            opacity: 0.7;
+        }
+
+        .api-status {
+            text-align: center;
+            padding: 20px;
+            font-style: italic;
+            opacity: 0.7;
+            background: var(--vscode-input-background);
+            border: 1px solid var(--vscode-input-border);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="positions-container">
+        <div class="api-status">
+            Configure exchange API credentials in settings to view positions
+        </div>
+    </div>
+
+    <div class="footer">
+        Data from {{exchangeId}} Exchange
+    </div>
+
+    <script src="{{jsPath}}"></script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoinWatchDog - Markets</title>
+    <style>
+        @import url('{{sharedCssPath}}');
+
+        .search-section {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            background: var(--vscode-input-background);
+            color: var(--vscode-input-foreground);
+            border: 1px solid var(--vscode-input-border);
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .search-input::placeholder {
+            font-size: 14px;
+            color: var(--vscode-descriptionForeground);
+            opacity: 0.5;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--vscode-focusBorder);
+        }
+
+        .search-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--vscode-input-background);
+            border: 1px solid var(--vscode-input-border);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-dropdown.show {
+            display: block;
+        }
+
+        .search-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--vscode-input-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-item:hover {
+            background: var(--vscode-list-hoverBackground);
+        }
+
+        .search-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-item-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-symbol {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .search-add {
+            font-size: 14px;
+            color: var(--vscode-descriptionForeground);
+            opacity: 0.5;
+        }
+
+        .no-results {
+            font-size: 14px;
+            padding: 15px 0;
+            text-align: center;
+            color: var(--vscode-descriptionForeground);
+            opacity: 0.5;
+        }
+
+        .search-name {
+            font-size: 10px;
+            color: var(--vscode-descriptionForeground);
+            opacity: 0.5;
+        }
+
+        .price-container {
+            display: flex;
+            flex-direction: column;
+            background: var(--vscode-input-background);
+            border-radius: 6px;
+        }
+
+        .market-card {
+            display: flex;
+            align-items: center;
+            min-height: 36px;
+            padding: 10px 15px;
+            position: relative;
+        }
+
+        .market-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+        }
+
+        .market-left {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .market-symbol {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--vscode-editor-foreground);
+            overflow-wrap: break-word;
+        }
+
+        .market-symbol .quote {
+            font-size: 12px;
+            font-weight: normal;
+            color: var(--vscode-descriptionForeground);
+            opacity: 0.5;
+        }
+
+        .market-badges {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .perp-badge {
+            background: rgba(255,177,23,.2);
+            color: #ffb117;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: normal;
+            white-space: nowrap;
+        }
+
+        .market-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .market-price {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--vscode-editor-foreground);
+            white-space: nowrap;
+        }
+
+        .market-change {
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .market-change.positive {
+            color: #25a750;
+        }
+
+        .market-change.negative {
+            color: #ca3f64;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .market-card:hover .remove-btn {
+            opacity: 1;
+        }
+
+        .remove-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .no-coins {
+            text-align: center;
+            padding: 40px 20px;
+            font-style: italic;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-section">
+        <div class="search-container">
+            <input
+                type="text"
+                class="search-input"
+                placeholder="Search for coins (e.g., BTC, ETH)"
+                id="search-input"
+                autocomplete="off"
+            >
+            <div class="search-dropdown" id="search-dropdown"></div>
+        </div>
+    </div>
+
+    <div class="price-container" id="price-container">
+        <div class="no-coins">
+            No coins being monitored. Search and add coins above.
+        </div>
+    </div>
+
+    <div class="footer">
+        Data from {{exchangeId}} Exchange
+    </div>
+
+    <script src="{{jsPath}}"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 {
-  "name": "coin-watchdog",
+  "name": "CoinWatchDog",
   "displayName": "CoinWatchDog",
   "description": "简单的OKX价格监控插件",
   "version": "2.0.0",
@@ -20,7 +20,7 @@
         {
           "id": "coinWatchDog",
           "title": "CoinWatchDog",
-          "icon": "$(graph)"
+          "icon": "./resources/icon.svg"
         }
       ]
     },
@@ -109,19 +109,39 @@
         "command": "coinWatchDog.openSettings",
         "title": "Settings",
         "icon": "$(gear)"
+      },
+      {
+        "command": "coinWatchDog.refreshMarkets",
+        "title": "Refresh Markets",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "coinWatchDog.refreshPositions",
+        "title": "Refresh Positions",
+        "icon": "$(refresh)"
       }
     ],
     "menus": {
       "view/title": [
         {
+          "command": "coinWatchDog.refreshMarkets",
+          "when": "view == marketsView",
+          "group": "navigation@1"
+        },
+        {
           "command": "coinWatchDog.openSettings",
           "when": "view == marketsView",
-          "group": "navigation"
+          "group": "navigation@2"
+        },
+        {
+          "command": "coinWatchDog.refreshPositions",
+          "when": "view == positionsView",
+          "group": "navigation@1"
         },
         {
           "command": "coinWatchDog.openSettings",
           "when": "view == positionsView",
-          "group": "navigation"
+          "group": "navigation@2"
         }
       ]
     }

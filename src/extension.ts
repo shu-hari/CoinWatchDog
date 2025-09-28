@@ -30,6 +30,22 @@ export function activate(context: vscode.ExtensionContext) {
         }
     );
 
+    // 注册市场刷新命令
+    const refreshMarketsCommand = vscode.commands.registerCommand(
+        'coinWatchDog.refreshMarkets',
+        () => {
+            marketsProvider.reset();
+        }
+    );
+
+    // 注册仓位刷新命令
+    const refreshPositionsCommand = vscode.commands.registerCommand(
+        'coinWatchDog.refreshPositions',
+        () => {
+            positionsProvider.reset();
+        }
+    );
+
     // 监听配置变化
     const configWatcher = vscode.workspace.onDidChangeConfiguration(event => {
         // 检查 markets 配置变更
@@ -47,19 +63,19 @@ export function activate(context: vscode.ExtensionContext) {
         // 检查代理配置变更
         if (event.affectsConfiguration('coinWatchDog.proxy')) {
             console.log('CoinWatchDog proxy configuration changed');
-            marketsProvider.onConfigurationChanged();
-            positionsProvider.onConfigurationChanged();
-        }
-        
-        // 检查其他可能影响两个provider的全局配置
-        if (event.affectsConfiguration('coinWatchDog.general')) {
-            console.log('CoinWatchDog general configuration changed');
-            marketsProvider.onConfigurationChanged();
-            positionsProvider.onConfigurationChanged();
+            marketsProvider.reset();
+            positionsProvider.reset();
         }
     });
 
-    context.subscriptions.push(marketsDisposable, positionsDisposable, settingsCommand, configWatcher);
+    context.subscriptions.push(
+        marketsDisposable, 
+        positionsDisposable, 
+        settingsCommand, 
+        refreshMarketsCommand, 
+        refreshPositionsCommand, 
+        configWatcher
+    );
 }
 
 export function deactivate() {

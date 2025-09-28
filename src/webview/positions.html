@@ -133,34 +133,24 @@
             gap: 5px;
         }
 
-        .no-positions {
+        .tip-text {
             text-align: center;
-            padding: 20px;
-            font-style: italic;
-            opacity: 0.7;
-        }
-
-        .api-status {
-            text-align: center;
-            padding: 20px;
-            font-style: italic;
+            padding: 40px 20px;
             opacity: 0.7;
             background: var(--vscode-input-background);
-            border: 1px solid var(--vscode-input-border);
-            border-radius: 8px;
-            margin-bottom: 20px;
+            border-radius: 6px;
         }
     </style>
 </head>
 <body>
     <div id="positions-container">
-        <div class="api-status">
-            Configure exchange API credentials in settings to view positions
+        <div class="tip-text">
+            Configure exchange credentials in settings to view positions
         </div>
     </div>
 
     <div class="footer">
-        Data from {{exchangeId}} Exchange
+        Data from <span id="exchange-name">{{exchangeId}}</span> Exchange
     </div>
 
     <script src="{{jsPath}}"></script>

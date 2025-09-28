@@ -22,7 +22,7 @@
             padding: 12px;
             background: var(--vscode-input-background);
             color: var(--vscode-input-foreground);
-            border: 1px solid var(--vscode-input-border);
+            border: none;
             border-radius: 6px;
             font-size: 14px;
             box-sizing: border-box;
@@ -108,7 +108,7 @@
             opacity: 0.5;
         }
 
-        .price-container {
+        .markets-container {
             display: flex;
             flex-direction: column;
             background: var(--vscode-input-background);
@@ -222,10 +222,9 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .no-coins {
+        .tip-text {
             text-align: center;
             padding: 40px 20px;
-            font-style: italic;
             opacity: 0.7;
         }
     </style>
@@ -244,14 +243,14 @@
         </div>
     </div>
 
-    <div class="price-container" id="price-container">
-        <div class="no-coins">
-            No coins being monitored. Search and add coins above.
+    <div class="markets-container" id="markets-container">
+        <div class="tip-text">
+            No coins being watched. Search and add coins above.
         </div>
     </div>
 
     <div class="footer">
-        Data from {{exchangeId}} Exchange
+        Data from <span id="exchange-name">{{exchangeId}}</span> Exchange
     </div>
 
     <script src="{{jsPath}}"></script>

@@ -9,6 +9,8 @@ window.addEventListener('message', (event: MessageEvent) => {
 
   if (message.command === 'updatePositions') {
     updatePositionsDisplay(message.data);
+  } else if (message.command === 'updateExchangeId') {
+    updatePositionsExchangeId(message.exchangeId);
   }
 });
 
@@ -16,7 +18,7 @@ function updatePositionsDisplay(positions: Position[]): void {
   const container = document.getElementById('positions-container') as HTMLElement;
 
   if (positions.length === 0) {
-    container.innerHTML = '<div class="no-positions">No open positions</div>';
+    container.innerHTML = '<div class="tip-text">No open positions</div>';
     return;
   }
 
@@ -113,4 +115,11 @@ function updatePositionsDisplay(positions: Position[]): void {
   });
 
   container.innerHTML = html;
+}
+
+function updatePositionsExchangeId(exchangeId: string): void {
+  const exchangeNameElement = document.getElementById('exchange-name') as HTMLElement;
+  if (exchangeNameElement && exchangeNameElement.textContent !== exchangeId) {
+    exchangeNameElement.textContent = exchangeId;
+  }
 }

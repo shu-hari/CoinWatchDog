@@ -8,10 +8,10 @@ declare const acquireVsCodeApi: () => VSCodeAPI;
 
 // Markets 相关接口
 interface WatchingSymbols {
-  [symbol: string]: TickerData;
+  [symbol: string]: Ticker;
 }
 
-interface TickerData {
+interface Ticker {
   last: number;          // 最新价格
   percentage: number;    // 涨跌幅百分比
   symbol: string;        // 交易对符号
@@ -23,6 +23,10 @@ interface SearchResult {
   base: string;
   quote: string;
   isPerp: boolean;
+}
+
+interface WatchingPositions {
+  [symbol: string]: Position;
 }
 
 // Positions 相关接口

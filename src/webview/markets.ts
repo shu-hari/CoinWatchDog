@@ -69,9 +69,11 @@ window.addEventListener('message', (event: MessageEvent) => {
   const message = event.data;
 
   if (message.command === 'updatePrices') {
-    updatePricesDisplay(message.data);
+    updateMarketsDisplay(message.data);
   } else if (message.command === 'searchResults') {
     displaySearchResults(message.data);
+  } else if (message.command === 'updateExchangeId') {
+    updateMarketsExchangeId(message.exchangeId);
   }
 });
 
@@ -98,12 +100,12 @@ function displaySearchResults(results: SearchResult[]): void {
   showSearchDropdown();
 }
 
-function updatePricesDisplay(watchingSymbols: WatchingSymbols): void {
-  const container = document.getElementById('price-container') as HTMLElement;
+function updateMarketsDisplay(watchingSymbols: WatchingSymbols): void {
+  const container = document.getElementById('markets-container') as HTMLElement;
   const symbols = Object.keys(watchingSymbols);
 
   if (symbols.length === 0) {
-    container.innerHTML = '<div class="no-coins">No coins being monitored. Search and add coins above.</div>';
+    container.innerHTML = '<div class="tip-text">No coins being watched. Search and add coins above.</div>';
     return;
   }
 
@@ -199,5 +201,12 @@ function updatePricesDisplay(watchingSymbols: WatchingSymbols): void {
         }
       }
     });
+  }
+}
+
+function updateMarketsExchangeId(exchangeId: string): void {
+  const exchangeNameElement = document.getElementById('exchange-name') as HTMLElement;
+  if (exchangeNameElement && exchangeNameElement.textContent !== exchangeId) {
+    exchangeNameElement.textContent = exchangeId;
   }
 }

@@ -203,12 +203,8 @@ export class PositionsProvider implements vscode.WebviewViewProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview): string {
-    // 动态检测环境：开发环境有 dist 目录，发布环境没有
-    const distPath = path.join(this._extensionUri.fsPath, "dist");
-    const isDevelopment = fs.existsSync(distPath);
-
     // 根据环境选择路径
-    const webviewDir = isDevelopment ? "dist/webview" : "webview";
+    const webviewDir = "dist/webview";
 
     // 读取HTML模板文件
     const htmlPath = path.join(

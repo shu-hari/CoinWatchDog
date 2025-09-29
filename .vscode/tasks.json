@@ -16,7 +16,7 @@
         "showReuseMessage": true,
         "clear": false
       },
-      "problemMatcher": "$tsc"
+      "problemMatcher": "$ts-webpack"
     },
     {
       "type": "npm",
@@ -31,7 +31,7 @@
         "clear": false
       },
       "isBackground": true,
-      "problemMatcher": "$tsc-watch"
+      "problemMatcher": "$ts-webpack-watch"
     }
   ]
 }

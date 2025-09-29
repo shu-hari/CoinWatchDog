@@ -1,13 +1,21 @@
 {
   "name": "CoinWatchDog",
   "displayName": "CoinWatchDog",
-  "description": "简单的OKX价格监控插件",
-  "version": "2.0.0",
+  "description": " Real-time cryptocurrency market monitoring and position tracking right in your editor",
+  "version": "1.0.0",
+  "publisher": "CoinWatchDog",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shu-hari/CoinWatchDog"
+  },
+  "license": "MIT",
   "engines": {
-    "vscode": "^1.74.0"
+    "vscode": "^1.56.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Visualization",
+    "Data Science"
   ],
   "activationEvents": [
     "onView:marketsView",
@@ -20,7 +28,7 @@
         {
           "id": "coinWatchDog",
           "title": "CoinWatchDog",
-          "icon": "./resources/icon.svg"
+          "icon": "./dist/assets/icon.svg"
         }
       ]
     },
@@ -147,18 +155,18 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./ && npm run copy-resources",
-    "copy-resources": "cp -r src/webview/*.html src/webview/*.css dist/webview/",
-    "watch": "npm run watch-ts & npm run watch-resources",
-    "watch-ts": "tsc -watch -p ./",
-    "watch-resources": "chokidar 'src/webview/*.{html,css}' -c 'npm run copy-resources'"
+    "compile": "webpack --mode=production",
+    "watch": "webpack --mode=development --watch",
+    "vscode:prepublish": "npm run compile"
   },
   "devDependencies": {
     "@types/node": "16.x",
-    "@types/vscode": "^1.74.0",
-    "chokidar-cli": "^3.0.0",
-    "typescript": "^4.9.4"
+    "@types/vscode": "^1.56.0",
+    "copy-webpack-plugin": "^13.0.1",
+    "ts-loader": "^9.5.4",
+    "typescript": "^4.9.4",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1"
   },
   "dependencies": {
     "ccxt": "^4.5.4"

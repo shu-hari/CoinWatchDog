@@ -64,6 +64,10 @@ function marketsRemoveCoin(symbol: string): void {
   });
 }
 
+// 将函数添加到全局作用域，供 onclick 内联事件使用
+(window as any).marketsAddCoin = marketsAddCoin;
+(window as any).marketsRemoveCoin = marketsRemoveCoin;
+
 // 消息监听器
 window.addEventListener('message', (event: MessageEvent) => {
   const message = event.data;

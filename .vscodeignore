@@ -1,13 +1,26 @@
+# 开发相关文件
 .vscode/**
 .vscode-test/**
 src/**
+scripts/**
 .gitignore
 .yarnrc
-vsc-extension-quickstart.md
 **/tsconfig.json
 **/.eslintrc.json
 **/*.map
-**/*.ts
+
+# 依赖包
 node_modules/**
+
+# 文档文件
 **/*.md
 !README.md
+**/*.mdc
+.claude/**
+
+# 其他开发文件
+.env*
+.DS_Store
+package-lock.json
+pnpm-lock.yaml
+yarn.lock

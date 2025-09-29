@@ -26,7 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
     const settingsCommand = vscode.commands.registerCommand(
         'coinWatchDog.openSettings',
         () => {
-            vscode.commands.executeCommand('workbench.action.openSettings', 'coinWatchDog');
+            vscode.commands.executeCommand('workbench.action.openSettings', '@ext:CoinWatchDog.CoinWatchDog');
         }
     );
 
@@ -58,13 +58,6 @@ export function activate(context: vscode.ExtensionContext) {
         if (event.affectsConfiguration('coinWatchDog.exchangeCredentials')) {
             console.log('CoinWatchDog exchangeCredentials configuration changed');
             positionsProvider.onConfigurationChanged();
-        }
-        
-        // 检查代理配置变更
-        if (event.affectsConfiguration('coinWatchDog.proxy')) {
-            console.log('CoinWatchDog proxy configuration changed');
-            marketsProvider.reset();
-            positionsProvider.reset();
         }
     });
 

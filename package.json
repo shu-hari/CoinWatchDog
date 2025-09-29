@@ -17,6 +17,7 @@
     "Visualization",
     "Data Science"
   ],
+  "icon": "./dist/assets/icon.png",
   "activationEvents": [
     "onView:marketsView",
     "onView:positionsView"
@@ -103,12 +104,6 @@
               "description": "API passphrase if required by the exchange (e.g., OKX)."
             }
           }
-        },
-        "coinWatchDog.proxy": {
-          "type": "string",
-          "default": "",
-          "markdownDescription": "In some specific cases you may want a proxy, when:\n- Exchange is not available in your location\n- Your IP is forbidden by exchange\n- You experience random restriction by exchange, like DDoS protection by Cloudflare.\n\nSupports `http`, `https`, and `socks` protocols.\n\nLeave empty to disable proxy.",
-          "scope": "window"
         }
       }
     },

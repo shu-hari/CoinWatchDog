@@ -11,7 +11,6 @@ module.exports = {
   // 多个入口点
   entry: {
     extension: './src/extension.ts',
-    utils: './src/utils.ts',
     'webview/markets': './src/webview/markets.ts',
     'webview/positions': './src/webview/positions.ts',
     'webview/types': './src/webview/types.ts'

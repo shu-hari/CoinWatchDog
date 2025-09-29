@@ -17,28 +17,10 @@ A powerful VSCode extension for real-time cryptocurrency market monitoring and p
 - **Comprehensive Metrics**: View PnL, leverage, margin mode, and position details
 - **Multi-Exchange Trading**: Support for major cryptocurrency exchanges
 
-### ⚙️ **Advanced Configuration**
-- **Proxy Support**: Built-in proxy configuration for restricted networks
-- **Exchange Selection**: Choose from 100+ supported exchanges
-- **Auto-refresh**: Configurable update intervals
-
 <!-- ## 📸 Screenshots
 
 ![Markets View](https://raw.githubusercontent.com/shu-hari/CoinWatchDog/main/resources/screenshot-markets.png)
 ![Positions View](https://raw.githubusercontent.com/shu-hari/CoinWatchDog/main/resources/screenshot-positions.png) -->
-
-## 🛠️ Installation
-
-1. Open VSCode
-2. Go to Extensions (Ctrl+Shift+X)
-3. Search for "CoinWatchDog"
-4. Click Install
-
-Or install directly from the [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=CoinWatchDog.CoinWatchDog)
-
-## 🤝 Contributing
-
-Contributions are welcome! Please read our [contributing guidelines](CONTRIBUTING.md) before submitting PRs.
 
 ## 🐛 Issues & Support
 
@@ -47,19 +29,6 @@ Found a bug or need help?
 - 📝 [Report Issues](https://github.com/shu-hari/CoinWatchDog/issues)
 - 💬 [Discussions](https://github.com/shu-hari/CoinWatchDog/discussions)
 - 📧 [Email Support](mailto:china.nishu@gmail.com)
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## ⭐ Support the Project
-
-If you find CoinWatchDog useful, consider:
-
-- ⭐ Starring the repository
-- 🐛 Reporting bugs
-- 💡 Suggesting new features
-- 📢 Sharing with the community
 
 ---
 

@@ -1,7 +1,6 @@
 import * as vscode from "vscode";
 import * as path from "path";
 import * as fs from "fs";
-import { applyProxyConfig } from "./utils";
 
 const ccxt = require("ccxt").pro;
 
@@ -146,11 +145,6 @@ export class MarketsProvider implements vscode.WebviewViewProvider {
       };
 
       const tempExchange = new ExchangeClass(exchangeConfig);
-
-      // 应用代理配置
-      const config = vscode.workspace.getConfiguration("coinWatchDog");
-      const proxyUrl = config.get<string>("proxy")!;
-      applyProxyConfig(tempExchange, proxyUrl);
 
       if (!tempExchange.has["watchTicker"]) {
         vscode.window.showWarningMessage(
